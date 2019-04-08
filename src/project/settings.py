@@ -25,7 +25,7 @@ SECRET_KEY = '&8u-f%v1-oa9eipy7mz%x0d$4p-7o$23z%@9&kakge+5@__3w_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["project-inspirit941.c9users.io"]
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'management',
 ]
 
 MIDDLEWARE_CLASSES = [
