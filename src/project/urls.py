@@ -21,4 +21,5 @@ from management.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^html/', html, name = 'html'),
+    url(r'^index/', index, name = 'index'),
 ]

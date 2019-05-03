@@ -10,3 +10,7 @@ def html(request):
     # print(sys.version)
     # print(torch.__version__)
     return render(request,'html.html')
+    
+def index(request):
+    
+    return render(request, 'index.html')
