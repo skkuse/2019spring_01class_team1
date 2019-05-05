@@ -5,4 +5,4 @@ cd src
 
 cmd창에 반드시 입력 후 작업하세요.
 위의 두 줄 복사해서 cmd에 붙여넣기하면 됩니다.
-python --version 했을 때 3.7.1이 나와야 합니다.
+python --version 했을 때 3.7.x이 나와야 합니다.
