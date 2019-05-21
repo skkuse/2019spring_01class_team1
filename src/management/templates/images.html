@@ -8,18 +8,19 @@
             <button type = "submit">Upload Img</button>
         </form>
         
+
+            
+            {% for dic in exceldata %}
         <table>
+                {% for name, value in dic.items %}
             <tr>
-              <th>header1</th>
-              <th>header2</th>
-            </tr>
-            {% for r in exceldata %}
-            <tr>
-              <th> {{ r.keys() }}</th>
-              <th> {{ r.values() }}</th>
+              <th> {{ name }}</th>
+              <th>{{ value }}</th>
             </tr> 
-            {% endfor %}
+                {% endfor %}
         </table>
+            {% endfor %}
+
         
     </body>
 </html>

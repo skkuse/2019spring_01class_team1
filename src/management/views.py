@@ -6,7 +6,6 @@ from .forms import UploadDocumentForm, UploadFileForm
 import os
 from django.core.files.storage import FileSystemStorage
 
-import pandas as pd
 
 # import django
 # import sys
