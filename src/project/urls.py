@@ -16,11 +16,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from management.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^html/', html, name = 'html'),
     url(r'^index/', index, name = 'index'),
+    url(r'^upload/$',upload, name = 'upload'),
+    url(r'^images/$',images, name= 'images')
     # url(r'^element/', element, name =  'element' )
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

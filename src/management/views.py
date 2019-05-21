@@ -1,4 +1,13 @@
 from django.shortcuts import render
+from management.functions import *
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .forms import UploadDocumentForm, UploadFileForm
+import os
+from django.core.files.storage import FileSystemStorage
+
+import pandas as pd
+
 # import django
 # import sys
 # import torch
@@ -14,3 +23,39 @@ def html(request):
 def index(request):
     
     return render(request, 'index.html')
+    
+
+# 엑셀 파일 업로드
+def upload(request):
+    username = "no"
+    if request.user.is_authenticated:
+        username = request.user.username
+    
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        # print(uploaded_file.name)
+        fs = FileSystemStorage(location='management/upload/'+str(username))
+        fs.save(uploaded_file.name, uploaded_file)
+        
+        
+    return render(request, 'upload.html')
+    
+# 이미지 업로드
+def images(request):
+    
+    
+    
+    username = "no"
+    if request.user.is_authenticated:
+        username = request.user.username
+    
+    result = excel_to_data("management/upload/"+str(username))
+    
+    
+    if request.method=='POST':
+        for file in request.FILES.getlist('file'):
+            uploaded_file = file
+            fs=FileSystemStorage(location='management/upload/'+str(username))
+            fs.save(uploaded_file.name, uploaded_file)
+            
+    return render(request, 'images.html',{'exceldata':result})

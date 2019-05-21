@@ -1,0 +1,25 @@
+<html>
+    <head>Img Uploads</head>
+    <body>
+        <h2>Img Upload</h2>
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type = "file" multiple name="file" accept="image/*">
+            <button type = "submit">Upload Img</button>
+        </form>
+        
+        <table>
+            <tr>
+              <th>header1</th>
+              <th>header2</th>
+            </tr>
+            {% for r in exceldata %}
+            <tr>
+              <th> {{ r.keys() }}</th>
+              <th> {{ r.values() }}</th>
+            </tr> 
+            {% endfor %}
+        </table>
+        
+    </body>
+</html>
