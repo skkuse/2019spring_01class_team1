@@ -41,20 +41,17 @@ def upload(request):
     
 # 이미지 업로드
 def images(request):
-    
-    
-    
+
     username = "no"
     if request.user.is_authenticated:
         username = request.user.username
     
     result = excel_to_data("management/upload/"+str(username))
-    # file path만 되어 있고 엑셀파일을 구체적으로 짚지 못했다. 그거만 해결하면됨.
     
     if request.method=='POST':
         for file in request.FILES.getlist('file'):
             uploaded_file = file
-            fs=FileSystemStorage(location='management/upload/'+str(username))
+            fs=FileSystemStorage(location='management/upload/'+str(username)+"/images")
             fs.save(uploaded_file.name, uploaded_file)
             
     return render(request, 'images.html',{'exceldata':result})

@@ -45,25 +45,25 @@ class Product(models.Model):
         '앞굽': 'front_heel',
         '총길이': 'shoes_height'
     }
-    
+    classes = models.CharField(max_length = 100, default=None, null=True)
     sn = models.AutoField(primary_key=True)
     sid = models.ForeignKey(Seller, on_delete = models.CASCADE)
     pname = models.CharField(max_length=255)
     material = models.CharField(max_length = 255)
     color = models.CharField(max_length=100)
-    measurement = models.FloatField(null=True, blank=True, default=None)
+    measurement = models.CharField(max_length=100,null=True, blank=True, default=None)
     madefrom = models.CharField(max_length = 100, default=None)
     madein = models.CharField(max_length=100, default=None)
-    date_of_production = models.DateField(null=True, blank=True, default=None)
-    quality_gurantee = models.DateField(null=True, blank=True, default=None)
+    date_of_production = models.CharField(max_length=100,null=True, blank=True, default=None)
+    quality_gurantee = models.CharField(max_length=100,null=True, blank=True, default=None)
     # 상의
-    size = models.IntegerField(null=True, blank=True, default=None)
-    shoulder = models.FloatField(null=True, blank=True, default=None)
-    chest = models.FloatField(null=True,blank=True, default=None)
-    sleeve_len = models.FloatField(null=True, blank=True, default=None)
-    sleeve_end = models.FloatField(null=True, blank=True, default=None)
-    armpit = models.FloatField(null=True, blank=True, default=None)
-    top_size = models.FloatField(null=True, blank=True, default=None)
+    size = models.CharField(max_length=100,null=True, blank=True, default=None)
+    shoulder = models.CharField(max_length=100,null=True, blank=True, default=None)
+    chest = models.CharField(max_length=100,null=True,blank=True, default=None)
+    sleeve_len = models.CharField(max_length=100,null=True, blank=True, default=None)
+    sleeve_end = models.CharField(max_length=100,null=True, blank=True, default=None)
+    armpit = models.CharField(max_length=100,null=True, blank=True, default=None)
+    top_size = models.CharField(max_length=100,null=True, blank=True, default=None)
     # 하의
     waist = models.FloatField(null=True, blank=True, default=None)
     thigh = models.FloatField(null=True, blank=True, default=None)
