@@ -21,12 +21,17 @@ from django.conf.urls.static import static
 from management.views import *
 
 urlpatterns = [
+    url(r'^$', index),
+    url(r'ClotheshangerEnter', index, name = 'index'),
+    # url(r'ClotheshangerIdx_m/', )
     url(r'^admin/', admin.site.urls),
-    url(r'^html/', html, name = 'html'),
-    url(r'^index/', index, name = 'index'),
+    # url(r'^index/', index, name = 'index'),
     url(r'^upload/$',upload, name = 'upload'),
     url(r'^images/$',images, name= 'images'),
-    url(r'^ClotheshangerSignup_m/', login_MD, name = 'login_MD')
+    url(r'^Clotheshangerlogin_m/', login_MD, name = 'login_MD'),
+    url(r'^Clotheshangerlogin_s/', login_Seller, name = 'login_Seller'),
+    url(r'^ClotheshangerSignup_m', login_MD, name = 'login_MD'),
+    url(r'^ClotheshangerSignup_s', login_Seller, name = 'login_Seller'),
     # url(r'^element/', element, name =  'element' )
 ]
 if settings.DEBUG:

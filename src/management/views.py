@@ -8,21 +8,16 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 
 
-# import django
-# import sys
-# import torch
-# Create your views here.
-
-def html(request):
-    
-    # print(django.VERSION)
-    # print(sys.version)
-    # print(torch.__version__)
-    return render(request,'html.html')
-    
-def index(request):
-    
-    return render(request, 'index.html')
+def index(request): 
+    return render(request, 'ClotheshangerEnter.html')
+def login_MD(request): 
+    return render(request, 'Clotheshangerlogin_m.html')
+def login_Seller(request):
+    return render(request, 'Clotheshangerlogin_s.html')
+def signup_MD(request):
+    return render(request, 'ClotheshangerSignup_m.html')
+def signup_Seller(request):
+    return render(request, "ClotheshangerSignup_s.html")
     
 
 # 엑셀 파일 업로드
@@ -75,9 +70,7 @@ def images(request):
     return render(request, 'images.html',{'exceldata':result})
     
 
-def login_MD(request):
-    
-    return render(request, 'ClotheshangerSignup_m.html')
+
 
 def classify(request):
     
