@@ -33,11 +33,13 @@ def upload(request):
     
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
-        # print(uploaded_file.name)
+        # 에러 처리 코드 필요함.
+        # 엑셀파일이 아닌 경우, 여러 개 파일이 올라온 경우.
         fs = FileSystemStorage(location='management/upload/'+str(username))
         fs.save(uploaded_file.name, uploaded_file)
-        #asfdfg
-        messages.success(request, 'Your password was updated successfully!')
+        
+        return redirect('images')
+        
         
     return render(request, 'upload.html')
     
@@ -53,7 +55,16 @@ def images(request):
     if request.method=='POST':
         for file in request.FILES.getlist('file'):
             uploaded_file = file
+            # 에러 처리 코드 필요함.
             fs=FileSystemStorage(location='management/upload/'+str(username)+"/images")
             fs.save(uploaded_file.name, uploaded_file)
             
+            # 여기 링크 추후에 변경 필요
+            return redirect("classification부분")
+            
     return render(request, 'images.html',{'exceldata':result})
+    
+
+def classify(request):
+    
+    return None

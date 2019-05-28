@@ -5,15 +5,8 @@
         <form method = "post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type = "file" name = "document">
+            <!--<input type="submit" value="Go to my link location" onclick="window.location='/images.html';" />       -->
             <button type = "submit">Upload file</button>
         </form>
-
     </body>
-            {% if messages %}
-          <ul class="messages">
-            {% for message in messages %}
-              <li class="{{ message.tags }}">{{ message }}</li>
-            {% endfor %}
-      </ul>
-        {% endif %}
 </html>

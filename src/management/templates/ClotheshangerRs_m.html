@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Clotheshanger - Registration Status</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/datepicker3.css" rel="stylesheet">
-	<link href="css/styles.css" rel="stylesheet">
+	<link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/font-awesome.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/datepicker3.css" %}' rel="stylesheet">
+	<link href='{% static "css/styles.css" %}' rel="stylesheet">
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -378,14 +378,14 @@
 	</div>	<!--/.main-->
 	  
 
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
+	<script src='{% static "js/jquery-1.11.1.min.js" %}'></script>
+	<script src='{% static "js/bootstrap.min.js" %}'></script>
+	<script src='{% static "js/chart.min.js" %}'></script>
+	<script src='{% static "js/chart-data.js" %}'></script>
+	<script src='{% static "js/easypiechart.js" %}'></script>
+	<script src='{% static "js/easypiechart-data.js" %}'></script>
+	<script src='{% static "js/bootstrap-datepicker.js" %}'></script>
+	<script src='{% static "js/custom.js" %}'></script>
 	<script>
 	window.onload = function () {
 	var chart1 = document.getElementById("line-chart").getContext("2d");
