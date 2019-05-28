@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .forms import UploadDocumentForm, UploadFileForm
 import os
 from django.core.files.storage import FileSystemStorage
+from django.contrib import messages
 
 
 # import django
@@ -36,6 +37,7 @@ def upload(request):
         fs = FileSystemStorage(location='management/upload/'+str(username))
         fs.save(uploaded_file.name, uploaded_file)
         #asfdfg
+        messages.success(request, 'Your password was updated successfully!')
         
     return render(request, 'upload.html')
     

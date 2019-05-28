@@ -7,5 +7,13 @@
             <input type = "file" name = "document">
             <button type = "submit">Upload file</button>
         </form>
+
     </body>
+            {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+      </ul>
+        {% endif %}
 </html>
