@@ -33,12 +33,15 @@ def upload(request):
     
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
-        print(uploaded_file.name.split(".")[1])
-        
+        _format = uploaded_file.name.split(".")[-1]
+        if _format != 'xlsx' or _format !="xls":
+            # 오류 메세지 반환
+            return redirect('upload')
+        else:
         # 에러 처리 코드 필요함.
         # 엑셀파일이 아닌 경우, 여러 개 파일이 올라온 경우.
-        fs = FileSystemStorage(location='management/upload/'+str(username))
-        fs.save(uploaded_file.name, uploaded_file)
+            fs = FileSystemStorage(location='management/upload/'+str(username))
+            fs.save(uploaded_file.name, uploaded_file)
         
         return redirect('images')
         
