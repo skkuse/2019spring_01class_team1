@@ -25,7 +25,8 @@ urlpatterns = [
     url(r'^html/', html, name = 'html'),
     url(r'^index/', index, name = 'index'),
     url(r'^upload/$',upload, name = 'upload'),
-    url(r'^images/$',images, name= 'images')
+    url(r'^images/$',images, name= 'images'),
+    url(r'^ClotheshangerSignup_m/', login_MD, name = 'login_MD')
     # url(r'^element/', element, name =  'element' )
 ]
 if settings.DEBUG:

@@ -33,17 +33,22 @@ def upload(request):
     
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
+        print(type(uploaded_file))
         _format = uploaded_file.name.split(".")[-1]
         if _format != 'xlsx' or _format !="xls":
+            messages.warning(request,'Uploading the file was failed')
+            return render(request, 'upload.html')
             # 오류 메세지 반환
-            return redirect('upload')
+            # return redirect('upload')
         else:
         # 에러 처리 코드 필요함.
         # 엑셀파일이 아닌 경우, 여러 개 파일이 올라온 경우.
             fs = FileSystemStorage(location='management/upload/'+str(username))
             fs.save(uploaded_file.name, uploaded_file)
+            messages.success(request,'The file was uploaded successfully')
+            return render(request, 'images.html')
         
-        return redirect('images')
+        #return redirect('images')
         
         
     return render(request, 'upload.html')
@@ -69,6 +74,10 @@ def images(request):
             
     return render(request, 'images.html',{'exceldata':result})
     
+
+def login_MD(request):
+    
+    return render(request, 'ClotheshangerSignup_m.html')
 
 def classify(request):
     
