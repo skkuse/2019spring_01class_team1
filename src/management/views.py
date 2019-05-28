@@ -33,7 +33,7 @@ def upload(request):
     
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
-        print(type(uploaded_file))
+        # print(type(uploaded_file))
         _format = uploaded_file.name.split(".")[-1]
         if _format != 'xlsx' or _format !="xls":
             messages.warning(request,'Uploading the file was failed')

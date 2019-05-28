@@ -1,6 +1,12 @@
 <html>
     <head>File Uploads</head>
     <body>
+        <p>
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif%} </p>
         <h2>File Upload</h2>
         <form method = "post" enctype="multipart/form-data">
             {% csrf_token %}

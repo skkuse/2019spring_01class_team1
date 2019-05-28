@@ -1,6 +1,13 @@
 <html>
     <head>Img Uploads</head>
     <body>
+        <p>
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif%} </p>
+        
         <h2>Img Upload</h2>
         <form method = "post" enctype="multipart/form-data">
             {% csrf_token %}
