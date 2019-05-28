@@ -33,6 +33,8 @@ def upload(request):
     
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
+        print(uploaded_file.name.split(".")[1])
+        
         # 에러 처리 코드 필요함.
         # 엑셀파일이 아닌 경우, 여러 개 파일이 올라온 경우.
         fs = FileSystemStorage(location='management/upload/'+str(username))
