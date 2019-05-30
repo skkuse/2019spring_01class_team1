@@ -61,8 +61,12 @@ def Pr2(request):
     if request.user.is_authenticated:
         username = request.user.username
     
-    result = excel_to_data("management/upload/"+str(username))
-    
+    temp = excel_to_data("management/upload/"+str(username))
+    result = []
+    for dic in temp:
+        a = (": ".join(list(dic.items())[0]), ", ".join(['{}: {}'.format(k,v) for k,v in list(dic.items())[1:]]))
+        result.append(a)
+        
     if request.method=='POST':
         for file in request.FILES.getlist('file'):
             uploaded_file = file
@@ -71,7 +75,7 @@ def Pr2(request):
             fs.save(uploaded_file.name, uploaded_file)
             
             # 여기 classification 부분으로 바뀌어야 함
-            return render(reqeust, 'ClotheshangerPr2_s.html')
+            return render(request, 'ClotheshangerPr2_s.html')
     
     
     return render(request, 'ClotheshangerPr2_s.html', {'exceldata':result})

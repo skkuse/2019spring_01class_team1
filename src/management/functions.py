@@ -9,10 +9,8 @@ from torchvision import datasets, transforms, models
 
 def excel_to_data(path):
     filelist = glob.glob(path+"/*.xlsx")
-    # print(filelist)
     df = pd.read_excel(filelist[0], header=1)
-    print(len(df))
-    return [{k:v for k,v in m.items() if pd.notnull(v)} for m in df.to_dict(orient='rows')]
+    return [{ k:v for k,v in m.items() if pd.notnull(v)} for m in df.to_dict(orient='rows')]
     
     
     
