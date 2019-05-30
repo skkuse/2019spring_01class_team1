@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'management',
 ]
+# AUTH_USER_MODEL = 'management.MD'
 
 MIDDLEWARE= [
     'django.middleware.security.SecurityMiddleware',
@@ -125,3 +126,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+

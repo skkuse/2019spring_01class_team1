@@ -1,0 +1,104 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Clotheshanger - MD Signup</title>
+	<link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/datepicker3.css" %}' rel="stylesheet">
+	<link href='{% static "css/styles.css" %}' rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+	
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+    <div class="pane/l panel-default">
+					<div class="panel-heading">
+						MD Sign up
+					</div>
+					<div class="panel-body">
+						
+						
+							<form class="form-contact" action="" method="POST">
+								{% csrf_token %} 
+								{% for field in form %}
+								<fieldset class="form-group">
+								  <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+								    <div class="form-group">
+								      <input type="text" class="form-control"
+								        name="{{ field.name }}"
+								        id="id_{{ field.name }}"
+								        value="{{ field.value }}" > 
+								        <!--<p class="help-text">{{ field.help_text }} </p>-->
+								       </div>
+								</fieldset>
+								{% endfor %}
+								   <input type="submit" value="Submit"  class="btn btn-primary">
+								</form>
+				
+							 
+							  
+								<!--<div class="form-group">-->
+								<!--	<label class="col-md-3 control-label" for="id_username">이름</label>-->
+								<!--	<div class="col-md-9">-->
+								<!--		<input id="name" name="id_username" type="text" placeholder="Your name" class="form-control" required>-->
+								<!--	</div>-->
+								<!--</div>-->
+							
+								<!-- Company id number input-->
+								<!--<div class="form-group">-->
+								<!--	<label class="col-md-3 control-label" for="id_pid">사번</label>-->
+								<!--	<div class="col-md-9">-->
+								<!--		<input id="idno" name="id_pid" type="text" placeholder="Your company ID number" class="form-control" required>-->
+								<!--	</div>-->
+								<!--</div>-->
+                                
+        <!--                         Company password input-->
+								<!--<div class="form-group">-->
+        <!--                                <label class="col-md-3 control-label" for="id_password1">비밀번호</label>-->
+        <!--                                <div class="col-md-9">-->
+        <!--                                    <input id="password" name="id_password1" type="password" placeholder="5~16 digits" class="form-control" required>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+
+        <!--                         Company password input-->
+								<!--<div class="form-group">-->
+        <!--                                <label class="col-md-3 control-label" for="id_password2">비밀번호 확인</label>-->
+        <!--                                <div class="col-md-9">-->
+        <!--                                    <input id="password_check" name="id_password2" type="password" placeholder="Rewrite password" class="form-control" required>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+								
+								<!-- Form actions -->
+								<!--<div class="form-group">-->
+								<!--	<div class="col-md-12 widget-right">-->
+								<!--		<div class="col-md-5"></div>-->
+								<!--	<div class="col-md-6">-->
+								<!--		<button type="submit" class="btn btn-primary">Submit</button>-->
+								<!--		<button type="reset" class="btn btn-default">Reset</button>-->
+								<!--	</div>-->
+								<!--	</div>-->
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div><!--/.col-->
+			<div class="col-sm-12">
+				<p class="back-link">ClothesHanger</p>
+			</div>
+		</div><!--/.row-->
+	</div>	<!--/.main-->
+	</div>
+</div>
+
+	<script src='{% static "js/jquery-1.11.1.min.js" %}'></script>
+	<script src='{% static "js/bootstrap.min.js" %}'></script>
+</body>
+</html>

@@ -1,17 +1,17 @@
-<!--{% load staticfiles %} // 깨짐 없이 링크를 걸기위함.-->
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Clotheshanger - Dashboard</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/datepicker3.css" rel="stylesheet">
-	<link href="css/styles.css" rel="stylesheet">
+	<link href={% static "css/bootstrap.min.css" %}' rel="stylesheet">
+	<link href={% static "css/font-awesome.min.css" %}' rel="stylesheet">
+	<link href={% static "css/datepicker3.css" %}' rel="stylesheet">
+	<link href={% static "css/styles.css" %}' rel="stylesheet">
 	
 	<!--Custom Font-->
-	<link href='{% static "https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" %}' rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
@@ -32,7 +32,7 @@
 					</a>
 						<ul class="dropdown-menu dropdown-messages">
 							<li>
-								<div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
+								<div class="dropdown-messages-box"><a href="profile" class="pull-left">
 									<img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
 									</a>
 									<div class="message-body"><small class="pull-right">3 mins ago</small>
@@ -42,7 +42,7 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
+								<div class="dropdown-messages-box"><a href="profile" class="pull-left">
 									<img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
 									</a>
 									<div class="message-body"><small class="pull-right">1 hour ago</small>
@@ -97,17 +97,17 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li class="active"><a href="CH_Dashboard(M).html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li><a href="CH_RegistrationApproval(M).html"><em class="fa fa-check">&nbsp;</em> Registration Approval</a></li>
-			<li><a href="CH_RegistrationStatus(M).html"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
-			<li><a href="CH_Login(M).html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li> <!--em class 이부분 도대체 어디서 생겨난건지?-->
+			<li class="active"><a href="CH_Dashboard_M"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="CH_RegistrationApproval_M"><em class="fa fa-check">&nbsp;</em> Registration Approval</a></li>
+			<li><a href="CH_RegistrationStatus_M"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
+			<li><a href="CH_Login_M"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li> <!--em class 이부분 도대체 어디서 생겨난건지?-->
 		</ul>
 	</div><!--/.sidebar-->
 		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="CH_Dashboard(M).html">
+				<li><a href="CH_Dashboard_M">
 					<em class="fa fa-home"></em>
 				</a></li>
 				<li class="active">Dashboard</li>
@@ -408,14 +408,14 @@
 		</div><!--/.row-->
 	</div>	<!--/.main-->
 	
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
+	<script src='{% static"js/jquery-1.11.1.min.js" %}'></script>
+	<script src='{% static"js/bootstrap.min.js" %}'></script>
+	<script src='{% static"js/chart.min.js" %}'></script>
+	<script src='{% static"js/chart-data.js" %}'></script>
+	<script src='{% static"js/easypiechart.js" %}'></script>
+	<script src='{% static"js/easypiechart-data.js" %}'></script>
+	<script src='{% static"js/bootstrap-datepicker.js" %}'></script>
+	<script src='{% static"js/custom.js" %}'></script>
 	
 	<script>
 		window.onload = function () {

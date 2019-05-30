@@ -22,22 +22,24 @@ from management.views import *
 
 urlpatterns = [
     url(r'^$', index),
-    url(r'ClotheshangerEnter', index, name = 'index'),
+    url(r'CH_UserSelection', index, name = 'index'),
     # url(r'ClotheshangerIdx_m/', )
     url(r'^admin/', admin.site.urls),
     # url(r'^index/', index, name = 'index'),
     url(r'^upload/$',upload, name = 'upload'),
     url(r'^images/$',images, name= 'images'),
-    url(r'^Clotheshangerlogin_m', login_MD, name = 'login_MD'),
-    url(r'^Clotheshangerlogin_s', login_Seller, name = 'login_Seller'),
-    url(r'^ClotheshangerSignup_m', login_MD, name = 'login_MD'),
-    url(r'^ClotheshangerSignup_s', login_Seller, name = 'login_Seller'),
+    url(r'^CH_Login_M', login_MD, name = 'login_MD'),
+    url(r'^CH_Login_R', login_Seller, name = 'login_Seller'),
+    url(r'^CH_Signup_M', signup_MD, name = 'login_MD'),
+    url(r'^CH_Signup_R', signup_Seller, name = 'login_Seller'),
     url(r'^ClotheshangerRa_m',Ra_m, name = 'Ra_m'),
     url(r'^ClotheshangerRs_m',Rs_m, name = 'Rs_m'),
     url(r'^ClotheshangerIdx_m',Idx_m, name =  'Idx_m' ),
     url(r'^ClotheshangerIdx_s', Idx_s, name = 'Idx_s'),
     url(r'^ClotheshangerPr2_s', Pr2, name ='Pr2'),
-    url(r'^ClotheshangerPr_s', Pr, name = 'Pr'),
+    # url(r'^ClotheshangerPr_s', Pr, name = 'Pr'),
+    url(r'^CH_FileSubmit', Pr, name = 'Pr'),
+    url(r'^CH_ImageSubmit', Pr2, name ='Pr2'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

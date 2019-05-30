@@ -1,11 +1,10 @@
 from django import forms
+from .models import MD
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
-class UploadDocumentForm(forms.Form):
-    file = forms.FileField()
-    image = forms.ImageField()
-
-
-class UploadFileForm(forms.Form):
-    name = forms.CharField(max_length = 15)
-    files = forms.FileField(widget=forms.ClearableFileInput(attrs = {'multiple': True}))
-    
+class MDCreationForm(UserCreationForm):
+    pid = forms.CharField(max_length = 255)
+    class Meta(UserCreationForm.Meta):
+        model = User
+        field = ('username','pid')

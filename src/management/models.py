@@ -1,10 +1,15 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 # Create your models here.
+# class MD(AbstractUser):
+#     pid = models.CharField(verbose_name='pid',max_length=255)
 class MD(models.Model):
-    pid = models.AutoField(primary_key=True)
-    # 패스워드는 장고에서 어떻게 처리하는지 확인해야 한다. password = 
-    name = models.CharField(max_length=20)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=255)
+    pid = models.CharField(max_length=30, blank=True)
+    # birth_date = models.DateField(null=True, blank=True)
+    
     
 class Seller(models.Model):
     sid = models.AutoField(primary_key=True)

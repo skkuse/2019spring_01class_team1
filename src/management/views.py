@@ -1,24 +1,48 @@
-from django.shortcuts import render
 from management.functions import *
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.urls import reverse
+from django.contrib.auth.models import User
 import os
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 import shutil
+from .forms import MDCreationForm
+# from management.models import MD
+# , MDLoginForm
 
 def index(request): 
     # 맨 뒷부분 no는 나중에 바꿔줘야 함.
-    r = img_classification("/src/management/upload/no")
-    print(r)
-    return render(request, 'ClotheshangerEnter.html')
+    # r = img_classification("/src/management/upload/no")
+    # print(r)
+    return render(request, 'CH_UserSelection.html')
 def login_MD(request): 
-    return render(request, 'Clotheshangerlogin_m.html')
+    
+    
+    return render(request, 'CH_Login_M.html')
 def login_Seller(request):
     return render(request, 'Clotheshangerlogin_s.html')
+    
 def signup_MD(request):
-    return render(request, 'ClotheshangerSignup_m.html')
+    
+    form = MDCreationForm(request.POST)
+    if request.method == 'POST':
+        print(form.is_valid())
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()
+            user.pid = form.cleaned_data.get('pid')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            # print(form.pid)
+            print('signup success')
+            user = authenticate(email=user.email, password=raw_password)
+    
+    # d = MD.objects.all()
+    # for i in d:
+    #     print(i.pid, i.username)
+    return render(request, 'CH_Signup_M.html',{"form":form})
+    
 def signup_Seller(request):
     return render(request, "ClotheshangerSignup_s.html")
 def Ra_m(request):
@@ -54,7 +78,7 @@ def Pr(request):
             return HttpResponseRedirect(reverse('Pr2'))
     
     
-    return render(request, 'ClotheshangerPr_s.html')
+    return render(request, 'CH_FileSubmit_R.html')
 
 # 이미지 업로드
 def Pr2(request):
@@ -83,7 +107,7 @@ def Pr2(request):
             # return render(request, 'ClotheshangerPr2_s.html')
     
     
-    return render(request, 'ClotheshangerPr2_s.html', {'exceldata':result})
+    return render(request, 'CH_ImageSubmit_R.html', {'exceldata':result})
 
 def Idx_m(request):
     return render(request, 'ClotheshangerIdx_m.html')
