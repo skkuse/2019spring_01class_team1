@@ -28,11 +28,16 @@ urlpatterns = [
     # url(r'^index/', index, name = 'index'),
     url(r'^upload/$',upload, name = 'upload'),
     url(r'^images/$',images, name= 'images'),
-    url(r'^Clotheshangerlogin_m/', login_MD, name = 'login_MD'),
-    url(r'^Clotheshangerlogin_s/', login_Seller, name = 'login_Seller'),
+    url(r'^Clotheshangerlogin_m', login_MD, name = 'login_MD'),
+    url(r'^Clotheshangerlogin_s', login_Seller, name = 'login_Seller'),
     url(r'^ClotheshangerSignup_m', login_MD, name = 'login_MD'),
     url(r'^ClotheshangerSignup_s', login_Seller, name = 'login_Seller'),
-    # url(r'^element/', element, name =  'element' )
+    url(r'^ClotheshangerRa_m',Ra_m, name = 'Ra_m'),
+    url(r'^ClotheshangerRs_m',Rs_m, name = 'Rs_m'),
+    url(r'^ClotheshangerIdx_m',Idx_m, name =  'Idx_m' ),
+    url(r'^ClotheshangerIdx_s', Idx_s, name = 'Idx_s'),
+    url(r'^ClotheshangerPr2_s', Pr2, name ='Pr2'),
+    url(r'^ClotheshangerPr_s', Pr, name = 'Pr'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

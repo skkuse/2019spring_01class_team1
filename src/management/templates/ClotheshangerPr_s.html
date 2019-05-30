@@ -11,7 +11,7 @@
 	<link href='{% static "css/styles.css" %}' rel="stylesheet">
 	
 	<!--Custom Font-->
-	<link href='{% static "https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" %}' rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
@@ -128,9 +128,44 @@
 							</ul>
 					<div class="tab-content">		
 						<div class="tab-pane fade in active" id="tab1">
+							<div class="row">
 							
+								<div class="col-lg-12">
+									<!--<h2>Alerts</h2>-->
+									<!--	<div class="alert bg-primary" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template </div>-->
+									<!--	<div class="alert bg-info" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+									<!--	<div class="alert bg-teal" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+									<!--	<div class="alert bg-success" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+									<!--	<div class="alert bg-warning" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+									<!--	<div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+								{% if messages %}
+						            {% for message in messages %}
+						                <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> {{ message }} </div>
+						            {% endfor %}
+						        {% endif%} 
+						        </div>
+							</div>
+							
+							<div class="panel-footer form-group">
+								<h3>상품 등록하기</h2>
+								<br>
+								<form method = "post" enctype="multipart/form-data">
+							        {% csrf_token %}
+							        <input type = "file" name = "document">
+							        <!--<input type="submit" value="Go to my link location" onclick="window.location='/images.html';" />       -->
+							        <br>
+							        <button type = "submit" class="btn btn-sm btn-default">Upload file</button>
+							    </form>
+								<!--<form action="ClotheshangerPr2_s.html"-->
+								<!--	method="POST" enctype="multipart/form-data">-->
+								<!--	<input type="file" name="userfile">-->
+								<!--	<input type="submit" value="upload" class="pull-right">-->
+								<!--	<p class="help-block">Example block-level help text here.</p>-->
+						
+								<!--</form>-->
+							</div><!--file input-->
 							<div class="panel-heading">
-								<em class="fa fa-paperclip">Excel 업로드 안내</em>
+								<em class="fa fa-paperclip">상품 등록방법 안내</em>
 							</div>
 							<div class="panel-body">
 								<div style="position: relative; height:0; padding-bottom: 30%">
@@ -144,17 +179,7 @@
 									<li>~ 한다.</li>
 								</ol>
 							</div>
-
-							<div class="panel-footer form-group">
-								<label>Excel File input</label>
-								<form action="ClotheshangerPr2_s.html"
-									method="POST" enctype="multipart/form-data">
-									<input type="file" name="userfile">
-									<input type="submit" value="upload" class="pull-right">
-									<p class="help-block">Example block-level help text here.</p>
-						
-								</form>
-							</div><!--file input-->
+							
 						</div><!--tab1-->
 					</div>
 				</div><!--tabs-->	
