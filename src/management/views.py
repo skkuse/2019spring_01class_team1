@@ -6,9 +6,12 @@ from django.urls import reverse
 import os
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
-
+import shutil
 
 def index(request): 
+    # 맨 뒷부분 no는 나중에 바꿔줘야 함.
+    r = img_classification("/src/management/upload/no")
+    print(r)
     return render(request, 'ClotheshangerEnter.html')
 def login_MD(request): 
     return render(request, 'Clotheshangerlogin_m.html')
@@ -53,9 +56,7 @@ def Pr(request):
     
     return render(request, 'ClotheshangerPr_s.html')
 
-def gotoPr2(request):
-    return redirect(request, "ClotheshangerPr2_s.html")
-    
+# 이미지 업로드
 def Pr2(request):
     username = "no"
     if request.user.is_authenticated:
@@ -71,11 +72,15 @@ def Pr2(request):
         for file in request.FILES.getlist('file'):
             uploaded_file = file
             # 에러 처리 코드 필요함.
+            # 매번 지우고 새로 업로드
+            if os.path.exists('management/upload/'+str(username)+"/images"):
+                shutil.rmtree('management/upload/'+str(username)+"/images")
+                
             fs=FileSystemStorage(location='management/upload/'+str(username)+"/images")
             fs.save(uploaded_file.name, uploaded_file)
             
-            # 여기 classification 부분으로 바뀌어야 함
-            return render(request, 'ClotheshangerPr2_s.html')
+            # 여기 classification 담당하는 부분으로 바꿔야 함
+            # return render(request, 'ClotheshangerPr2_s.html')
     
     
     return render(request, 'ClotheshangerPr2_s.html', {'exceldata':result})
@@ -137,5 +142,7 @@ def images(request):
 
 
 def classify(request):
+    r = img_classification("/src/management/upload/no/images")
     
     return None
+    
