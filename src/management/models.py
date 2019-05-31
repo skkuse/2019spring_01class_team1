@@ -1,24 +1,35 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Create your models here.
 
+class User(AbstractUser):
+    pass
+    cate = models.CharField(max_length=2,blank=True)
+    corporation = models.CharField(verbose_name = 'corporation',max_length=255, blank=True)
+    pid = models.CharField(verbose_name = 'pid',max_length=30, blank=True)
+    sid = models.CharField(verbose_name = 'sid',max_length=255,blank=True)
+    
 
-class MD(AbstractUser):
+class MD(User):
     # objects = models.Manager()
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
     # username = models.CharField(max_length=255)
-    pid = models.CharField(verbose_name = 'pid',max_length=30, blank=True)
-    cate = models.CharField(max_length=2,default=None)
-    corp = models.CharField(max_length=255, default=None, blank=True)
-    sid = models.CharField(verbose_name = 'sid',max_length=255,default=None)
+    
+    # pid = models.CharField(verbose_name = 'pid',max_length=30, blank=True)
+    # cate = models.CharField(verbose_name = 'cate', max_length=2,default="MD")
+    # corporation = models.CharField(verbose_name = 'corporation',max_length=255, blank=True)
+    # sid = models.CharField(verbose_name = 'sid',max_length=255,blank=True)
     USERNAME_FIELD = 'username'
     # birth_date = models.DateField(null=True, blank=True)
     
-
-
+class RS(User):
+    USERNAME_FIELD = 'username'
+    # sid = models.CharField(verbose_name = 'sid',max_length=255,blank=True)
+    # corporation = models.CharField(verbose_name = 'corporation',max_length=255, blank=True)
+    # cate = models.CharField(max_length=2, verbose_name = 'cate', default='RS')
     
 class Seller(models.Model):
     sid = models.AutoField(primary_key=True)

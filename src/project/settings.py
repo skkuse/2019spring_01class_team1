@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'management',
 ]
-AUTH_USER_MODEL = 'management.MD'
+AUTH_USER_MODEL = 'management.User'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
@@ -129,4 +129,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-
+LOGIN_URL='/'
+LOGIN_REDIRECT_URL='/CH_UserSelection'

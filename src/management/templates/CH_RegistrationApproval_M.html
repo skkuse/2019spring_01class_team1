@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Clotheshanger - Registration Approval</title>
-	<link href='{% static"css/bootstrap.min.css"%}' rel="stylesheet">
-	<link href='{% static"css/font-awesome.min.css"%}' rel="stylesheet">
-	<link href='{% static"css/datepicker3.css"%}' rel="stylesheet">
-	<link href='{% static"css/styles.css"%}' rel="stylesheet">
+	<link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/font-awesome.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/datepicker3.css" %}' rel="stylesheet">
+	<link href='{% static "css/styles.css" %}' rel="stylesheet">
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -137,16 +137,17 @@
 					대기 중인 상품 목록
 					</div>
 					<!--상품-->
+					{% for iter in data %}
 					<div class="panel-body">
 							
 						<div class="col-md-2">
 							<!--if문 사용 하는 부분-->
-							<img width="90"src="C:\Users\pc\Desktop\소프트웨어 공학개론\KakaoTalk_20190528_185516268.jpg" alt="bag"/>
+							<img width="90" src = "{{ iter.1 }}" alt="image"/>
 						</div>
 						<div class="col-md-8">
-						<a href="CH_ProductDetails.html" target="_blank"><h5>상품 예시 1</h5></a>
+						<a href="CH_ProductDetails" target="_blank"><h5>{{ iter.0 }}</h5></a>
 						<div class="panel-body"></div>
-						<p class="color-teal">분류결과</p>
+						<p>분류결과 : <span class="color-teal">{{ iter.2 }}</span></p>
 						</div>
 						<div class="col-md-2 pull-right">
 							<div class="form-group"></div>
@@ -154,27 +155,29 @@
 							
 							<button type="button" class="btn btn-lg btn-warning">반려</button>
 						</div>							
-			</div>
-			<!--상품 하나 끝-->
-					<!--상품-->
-					<div class="panel-body">
-							
-								<div class="col-md-2">
-									<!--if문 사용 하는 부분-->
-									<img width="90"src="C:\Users\pc\Desktop\소프트웨어 공학개론\KakaoTalk_20190528_185516268.jpg" alt="bag"/>
-								</div>
-								<div class="col-md-8">
-								<a href="" onclick="window.open('CH_ProductDetails.html','ClothesHanger','width=600,height=850,location=no,status=no,scrollbars=yes');"><h5>상품 예시 2 - 새 창에서 열기</h5></a>
-								<div class="panel-body"></div>
-								<p class="color-red">분류결과</p>
-								</div>
-								<div class="col-md-2 pull-right">
-									<div class="form-group"></div>
-									<button type="button" class="btn btn-lg btn-success">승인</button>
-									
-									<button type="button" class="btn btn-lg btn-warning">반려</button>
-								</div>							
 					</div>
+						
+					{% endfor %}
+					<!--상품 하나 끝-->
+					<!--상품-->
+					<!--<div class="panel-body">-->
+							
+					<!--			<div class="col-md-2">-->
+									<!--if문 사용 하는 부분-->
+					<!--				<img width="90"src="C:\Users\pc\Desktop\소프트웨어 공학개론\KakaoTalk_20190528_185516268.jpg" alt="bag"/>-->
+					<!--			</div>-->
+					<!--			<div class="col-md-8">-->
+					<!--			<a href="" onclick="window.open('CH_ProductDetails','ClothesHanger','width=600,height=850,location=no,status=no,scrollbars=yes');"><h5>상품 예시 2 - 새 창에서 열기</h5></a>-->
+					<!--			<div class="panel-body"></div>-->
+					<!--			<p class="color-red">분류결과</p>-->
+					<!--			</div>-->
+					<!--			<div class="col-md-2 pull-right">-->
+					<!--				<div class="form-group"></div>-->
+					<!--				<button type="button" class="btn btn-lg btn-success">승인</button>-->
+									
+					<!--				<button type="button" class="btn btn-lg btn-warning">반려</button>-->
+					<!--			</div>							-->
+					<!--</div>-->
 					<!--상품 하나 끝-->
 				</div>
 			</div>
@@ -188,14 +191,14 @@
 	</div>	<!--/.main-->
 	  
 
-<script src='{% static"js/jquery-1.11.1.min.js"%}'></script>
-	<script src='{% static"js/bootstrap.min.js"%}'></script>
-	<script src='{% static"js/chart.min.js"%}'></script>
-	<script src='{% static"js/chart-data.js"%}'></script>
-	<script src='{% static"js/easypiechart.js"%}'></script>
-	<script src='{% static"js/easypiechart-data.js"%}'></script>
-	<script src='{% static"js/bootstrap-datepicker.js"%}'></script>
-	<script src='{% static"js/custom.js"%}'></script>
+	<script src='{% static "js/jquery-1.11.1.min.js" %}'></script>
+	<script src='{% static "js/bootstrap.min.js" %}'></script>
+	<script src='{% static "js/chart.min.js" %}'></script>
+	<script src='{% static "js/chart-data.js" %}'></script>
+	<script src='{% static "js/easypiechart.js" %}'></script>
+	<script src='{% static "js/easypiechart-data.js" %}'></script>
+	<script src='{% static "js/bootstrap-datepicker.js" %}'></script>
+	<script src='{% static "js/custom.js" %}'></script>
 	
 </body>
 </html>

@@ -11,11 +11,18 @@ from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 import shutil
-from .forms import MDCreationForm, MDLoginForm
+from .forms import MDCreationForm, MDLoginForm, RSCreationForm
 from .models import *
+import time
 
 def index(request): 
-    print(request.user)
+    # sd = User.objects.get(username='test1')
+    # print(sd.cate)
+    # t = User.objects.all()
+    # for i in t:
+    #     print(t)
+    # print(request.user.id)
+    
     # 맨 뒷부분 no는 나중에 바꿔줘야 함.
     # r = img_classification("/src/management/upload/no")
     # print(r)
@@ -27,11 +34,12 @@ def Logout(request):
     return redirect(reverse("index"))
     
 def login_MD(request): 
+    print(request.user.cate)
     
-    d = MD.objects.all()
-    print(d)
-    for i in d:
-        print(i.username, i.pid, i.cate)
+    # d = MD.objects.all()
+    # print(d)
+    # for i in d:
+    #     print(i.username, i.pid)
     if request.method == 'POST':
         form = MDLoginForm(request.POST)
         
@@ -41,7 +49,7 @@ def login_MD(request):
         
         if user is not None:
             print(user.is_authenticated)
-            print(user, user.cate)
+            print(user)
             login(request, user)
             print("login success")
             return HttpResponseRedirect(reverse('dashboard_MD'))
@@ -54,18 +62,44 @@ def login_MD(request):
     
     return render(request, 'CH_Login_M.html',{"form":form})
 
-@login_required
+# @login_required
 def dashboard_MD(request):
-    print(request.user.cate, request.user)
-    return render(request, "CH_Dashboard_M.html")
+    # print(request.user.cate, request.user.id)
+    return render(request, "CH_Dashboard_M.html", {"data":request})
+    
+# @login_required
+def dashboard_RS(request):
+    # print(request.user.cate)
+    return render(request,"CH_Dashboard_R.html", {"data":request})
     
 def login_Seller(request):
-    return render(request, 'Clotheshangerlogin_s.html')
+    if request.method == 'POST':
+        form = MDLoginForm(request.POST)
+        
+        username = request.POST["username"]
+        password = request.POST['password']
+        user = authenticate(username = username, password = password)
+        
+        if user is not None:
+            print(user.is_authenticated)
+            print(user)
+            login(request, user)
+            print("login success")
+            return HttpResponseRedirect(reverse('dashboard_RS'))
+        else:
+            # 로그인창에서 에러메세지 출력
+            return HttpResponseRedirect(reverse("login_Seller"))
+    else:
+        form = MDLoginForm()
+
+    
+    return render(request, 'CH_Login_R.html',{"form":form})
+
     
 def signup_MD(request):
     if request.method == 'POST':
         form = MDCreationForm(request.POST)
-        # print(form.is_valid())
+
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
@@ -77,7 +111,7 @@ def signup_MD(request):
             print(user, user.username, user.pid)
             
             user = authenticate(username=username, password=raw_password)
-            login(request,user)
+
             # 회원가입 완료 안내 팝업창 필요
             
             return HttpResponseRedirect(reverse('login_MD'))
@@ -91,16 +125,43 @@ def signup_MD(request):
     return render(request, 'CH_Signup_M.html',{"form":form})
     
 def signup_Seller(request):
+    if request.method == 'POST':
+        form = RSCreationForm(request.POST)
+        # print(form.is_valid())
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()
+            user.corporation = form.cleaned_data.get('corporation')
+            user.cate = "RS"
+            # print(user.cate)
+            user.sid = str(time.time())
+            user.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            
+            print(user, user.username, user.corporation)
+            
+            user = authenticate(username=username, password=raw_password)
+
+            # 회원가입 완료 안내 팝업창 필요
+            
+            return HttpResponseRedirect(reverse('Login_Seller'))
+    else:
+        form = RSCreationForm()
+        
+    d = RS.objects.all()
+    print(d)
+    for i in d:
+        print(i.username, i.sid, i.cate)
+    return render(request, 'CH_Signup_R.html',{"form":form})
     
-    
-    
-    return render(request, "ClotheshangerSignup_s.html")
 def Ra_m(request):
     return render(request, 'ClotheshangerRa_m.html')
 def Rs_m(request):
     return render(request, 'ClotheshangerRs_m.html')
 
 # 엑셀 파일 업르도
+# @login_required
 def Pr(request):
     
     username = "no"
@@ -131,10 +192,11 @@ def Pr(request):
     return render(request, 'CH_FileSubmit_R.html')
 
 # 이미지 업로드
+# @login_required
 def Pr2(request):
     username = "no"
     if request.user.is_authenticated:
-        username = request.user.username
+        username = request.user
     
     temp = excel_to_data("management/upload/"+str(username))
     result = []
@@ -163,60 +225,22 @@ def Idx_m(request):
     return render(request, 'ClotheshangerIdx_m.html')
 def Idx_s(request):
     return render(request, 'ClotheshangerIdx_s.html')
-
-# 엑셀 파일 업로드
-def upload(request):
+    
+#@login_required
+def Reg_approv(request):
     username = "no"
     if request.user.is_authenticated:
-        username = request.user.username
-    
-    if request.method == 'POST':
-        uploaded_file = request.FILES['document']
-        # print(type(uploaded_file))
-        _format = uploaded_file.name.split(".")[-1]
-        if _format != 'xlsx' or _format !="xls":
-            messages.warning(request,'Uploading the file was failed')
-            return render(request, 'upload.html')
-            # 오류 메세지 반환
-            # return redirect('upload')
-        else:
-        
-            fs = FileSystemStorage(location='management/upload/'+str(username))
-            fs.save(uploaded_file.name, uploaded_file)
-            messages.success(request,'The file was uploaded successfully')
-            return render(request, 'images.html')
-        
-        #return redirect('images')
-        
-        
-    return render(request, 'upload.html')
-    
-# 이미지 업로드
-def images(request):
+        username = request.user
+    result = img_classification("/src/management/upload/"+str(username))
+    temp = excel_to_data("management/upload/"+str(username))
+    prod_name = []
+    for dic in temp:
+        prod_name.append(": ".join(list(dic.items())[0]))
+    del temp
+    data = [(name, img_route, classify) for name, (img_route, classify) in zip(prod_name, result)]
+    return render(request, 'CH_RegistrationApproval_M.html', {"data":data})
 
-    username = "no"
-    if request.user.is_authenticated:
-        username = request.user.username
+def Reg_status(request):
     
-    result = excel_to_data("management/upload/"+str(username))
-    
-    if request.method=='POST':
-        for file in request.FILES.getlist('file'):
-            uploaded_file = file
-            # 에러 처리 코드 필요함.
-            fs=FileSystemStorage(location='management/upload/'+str(username)+"/images")
-            fs.save(uploaded_file.name, uploaded_file)
-            
-            # 여기 링크 추후에 변경 필요
-            return redirect("classification부분")
-            
-    return render(request, 'images.html',{'exceldata':result})
-    
-
-
-
-def classify(request):
-    r = img_classification("/src/management/upload/no/images")
-    
-    return None
-    
+    ## 여기 템플릿에서 dashboard 클릭하면 오류뜬다.
+    return render(request, "CH_RegistrationStatus_M.html")
