@@ -1,49 +1,99 @@
 from management.functions import *
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 import os
+from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 import shutil
-from .forms import MDCreationForm
-# from management.models import MD
-# , MDLoginForm
+from .forms import MDCreationForm, MDLoginForm
+from .models import *
 
 def index(request): 
+    print(request.user)
     # 맨 뒷부분 no는 나중에 바꿔줘야 함.
     # r = img_classification("/src/management/upload/no")
     # print(r)
     return render(request, 'CH_UserSelection.html')
+
+@login_required
+def Logout(request):
+    logout(request)
+    return redirect(reverse("index"))
+    
 def login_MD(request): 
     
+    d = MD.objects.all()
+    print(d)
+    for i in d:
+        print(i.username, i.pid, i.cate)
+    if request.method == 'POST':
+        form = MDLoginForm(request.POST)
+        
+        username = request.POST["username"]
+        password = request.POST['password']
+        user = authenticate(username = username, password = password)
+        
+        if user is not None:
+            print(user.is_authenticated)
+            print(user, user.cate)
+            login(request, user)
+            print("login success")
+            return HttpResponseRedirect(reverse('dashboard_MD'))
+        else:
+            # 로그인창에서 에러메세지 출력
+            return HttpResponseRedirect(reverse("login_MD"))
+    else:
+        form = MDLoginForm()
+        # return render(request,"CH_Login_M.html")
     
-    return render(request, 'CH_Login_M.html')
+    return render(request, 'CH_Login_M.html',{"form":form})
+
+@login_required
+def dashboard_MD(request):
+    print(request.user.cate, request.user)
+    return render(request, "CH_Dashboard_M.html")
+    
 def login_Seller(request):
     return render(request, 'Clotheshangerlogin_s.html')
     
 def signup_MD(request):
-    
-    form = MDCreationForm(request.POST)
     if request.method == 'POST':
-        print(form.is_valid())
+        form = MDCreationForm(request.POST)
+        # print(form.is_valid())
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
             user.pid = form.cleaned_data.get('pid')
+            user.cate = "MD"
             user.save()
+            username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            # print(form.pid)
-            print('signup success')
-            user = authenticate(email=user.email, password=raw_password)
-    
-    # d = MD.objects.all()
-    # for i in d:
-    #     print(i.pid, i.username)
+            print(user, user.username, user.pid)
+            
+            user = authenticate(username=username, password=raw_password)
+            login(request,user)
+            # 회원가입 완료 안내 팝업창 필요
+            
+            return HttpResponseRedirect(reverse('login_MD'))
+    else:
+        form = MDCreationForm()
+        
+    d = MD.objects.all()
+    print(d)
+    for i in d:
+        print(i.username, i.pid, i.cate)
     return render(request, 'CH_Signup_M.html',{"form":form})
     
 def signup_Seller(request):
+    
+    
+    
     return render(request, "ClotheshangerSignup_s.html")
 def Ra_m(request):
     return render(request, 'ClotheshangerRa_m.html')

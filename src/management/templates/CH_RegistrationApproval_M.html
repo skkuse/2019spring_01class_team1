@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Clotheshanger - Registration Approval</title>
-	<link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet">
-	<link href='{% static "css/font-awesome.min.css" %}' rel="stylesheet">
-	<link href='{% static "css/datepicker3.css" %}' rel="stylesheet">
-	<link href='{% static "css/styles.css" %}' rel="stylesheet">
+	<link href='{% static"css/bootstrap.min.css"%}' rel="stylesheet">
+	<link href='{% static"css/font-awesome.min.css"%}' rel="stylesheet">
+	<link href='{% static"css/datepicker3.css"%}' rel="stylesheet">
+	<link href='{% static"css/styles.css"%}' rel="stylesheet">
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -98,17 +98,17 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="CH_Dashboard(M)"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li class="active"><a href="CH_RegistrationApproval(M)"><em class="fa fa-check">&nbsp;</em> Registration Approval</a></li>
-			<li><a href="CH_RegistrationStatus(M)"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
-			<li><a href="CH_Login(M)"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="CH_Dashboard_M"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li class="active"><a href="CH_RegistrationApproval_M"><em class="fa fa-check">&nbsp;</em> Registration Approval</a></li>
+			<li><a href="CH_RegistrationStatus_M"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
+			<li><a href="CH_Login_M"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="CH_RegistrationApproval(M)">
+				<li><a href="CH_RegistrationApproval_M">
 					<em class="fa fa-home"></em>
 				</a></li>
 				<li class="active">Registration Approval</li>
@@ -136,37 +136,46 @@
 					<div class="panel-heading profile-usertitle-status">
 					대기 중인 상품 목록
 					</div>
-					<!--반복문 사용하는 부분-->
+					<!--상품-->
 					<div class="panel-body">
-						<div class="alert bg-primary">
-							<div class="col-md-2">
-								<!--if문 사용 하는 부분 일치 color-teal 불일치 color-red-->
-								<p class="color-red">불일치</p>
-							</div>
 							
-							<a href="CH_ProductDetails" target="_blank">예시1 - 새 탭에서 열기</a>
-							<div class="col-md-2 pull-right">
-								<button type="button" class="btn btn-xs btn-success">승인</button>
-								<button type="button" class="btn btn-xs btn-warning">반려</button>
-							</div>
+						<div class="col-md-2">
+							<!--if문 사용 하는 부분-->
+							<img width="90"src="C:\Users\pc\Desktop\소프트웨어 공학개론\KakaoTalk_20190528_185516268.jpg" alt="bag"/>
 						</div>
-					</div>
-					<!--반복문 사용하는 부분 끝-->
-
+						<div class="col-md-8">
+						<a href="CH_ProductDetails.html" target="_blank"><h5>상품 예시 1</h5></a>
+						<div class="panel-body"></div>
+						<p class="color-teal">분류결과</p>
+						</div>
+						<div class="col-md-2 pull-right">
+							<div class="form-group"></div>
+							<button type="button" class="btn btn-lg btn-success">승인</button>
+							
+							<button type="button" class="btn btn-lg btn-warning">반려</button>
+						</div>							
+			</div>
+			<!--상품 하나 끝-->
+					<!--상품-->
 					<div class="panel-body">
-							<div class="alert bg-primary">
+							
 								<div class="col-md-2">
 									<!--if문 사용 하는 부분-->
-									<p class="color-teal">일치</p>
+									<img width="90"src="C:\Users\pc\Desktop\소프트웨어 공학개론\KakaoTalk_20190528_185516268.jpg" alt="bag"/>
 								</div>
-								
-								<a href="" onclick="window.open('CH_ProductDetails.html','ClothesHanger','width=600,height=850,location=no,status=no,scrollbars=yes');">예시 2 - 새 창에서 열기</a>
+								<div class="col-md-8">
+								<a href="" onclick="window.open('CH_ProductDetails.html','ClothesHanger','width=600,height=850,location=no,status=no,scrollbars=yes');"><h5>상품 예시 2 - 새 창에서 열기</h5></a>
+								<div class="panel-body"></div>
+								<p class="color-red">분류결과</p>
+								</div>
 								<div class="col-md-2 pull-right">
-									<button type="button" class="btn btn-xs btn-success">승인</button>
-									<button type="button" class="btn btn-xs btn-warning">반려</button>
-								</div>
-							</div>
-						</div>
+									<div class="form-group"></div>
+									<button type="button" class="btn btn-lg btn-success">승인</button>
+									
+									<button type="button" class="btn btn-lg btn-warning">반려</button>
+								</div>							
+					</div>
+					<!--상품 하나 끝-->
 				</div>
 			</div>
 			
@@ -179,14 +188,14 @@
 	</div>	<!--/.main-->
 	  
 
-	<script src='{% static "js/jquery-1.11.1.min.js" %}'></script>
-	<script src='{% static "js/bootstrap.min.js" %}'></script>
-	<script src='{% static "js/chart.min.js" %}'></script>
-	<script src='{% static "js/chart-data.js" %}'></script>
-	<script src='{% static "js/easypiechart.js" %}'></script>
-	<script src='{% static "js/easypiechart-data.js" %}'></script>
-	<script src='{% static "js/bootstrap-datepicker.js" %}'></script>
-	<script src='{% static "js/custom.js" %}'></script>
+<script src='{% static"js/jquery-1.11.1.min.js"%}'></script>
+	<script src='{% static"js/bootstrap.min.js"%}'></script>
+	<script src='{% static"js/chart.min.js"%}'></script>
+	<script src='{% static"js/chart-data.js"%}'></script>
+	<script src='{% static"js/easypiechart.js"%}'></script>
+	<script src='{% static"js/easypiechart-data.js"%}'></script>
+	<script src='{% static"js/bootstrap-datepicker.js"%}'></script>
+	<script src='{% static"js/custom.js"%}'></script>
 	
 </body>
 </html>

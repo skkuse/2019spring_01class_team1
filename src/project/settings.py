@@ -30,8 +30,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'management',
 ]
-# AUTH_USER_MODEL = 'management.MD'
-
+AUTH_USER_MODEL = 'management.MD'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 MIDDLEWARE= [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

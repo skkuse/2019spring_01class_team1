@@ -21,22 +21,25 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading"><em class="fa fa-xl fa-key color-blue"></em>Log in(MD)</div>
 				<div class="panel-body">
-					<form role="form">
+					<form role="form" method = 'post'>
+						{% csrf_token %}
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+								<input class="form-control" placeholder = "login_id" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" type="text" />
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Password" name="password" type="password" value="">
+								<input class="form-control" placeholder="password" id="{{ form.password.id_for_label }}" maxlength="120" name="{{ form.password.html_name }}" type="password" />
 							</div>
-							<div class="checkbox">
-								<label>
-									<input name="remember" type="checkbox" value="Remember Me">Remember Me
-								</label>
-							</div>
-							<a href="CH_Dashboard_M" class="btn btn-primary">Login</a>
+							<br>
+							<!--<div class="checkbox">-->
+							<!--	<label>-->
+							<!--		<input name="remember" type="checkbox" value="Remember Me">Remember Me-->
+							<!--	</label>-->
+							<!--</div>-->
+							<button type="submit" class="btn btn-primary" >Submit</button>
 							<div><em class="fa fa-key">&nbsp;</em></div>
-							<a href="CH_Signup_M" class="btn btn-primary">Sign up</a></fieldset>
+							<a href="CH_Signup_M" class="btn btn-primary">Sign up</a>
+							</fieldset>
 							
 					</form>
 				</div>
