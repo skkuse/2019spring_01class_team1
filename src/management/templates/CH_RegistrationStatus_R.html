@@ -22,7 +22,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				
-				<a class="navbar-brand" href="CH_Dashboard_M"><span>Clothes</span>Hanger</a>
+				<a class="navbar-brand" href="CH_Dashboard_R"><span>Clothes</span>Hanger</a>
 				
 			</div>
 		</div><!-- /.container-fluid -->
@@ -31,7 +31,7 @@
 		<div class="profile-sidebar">
 			
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name"><em class="fa fa-wrench">&nbsp;</em> {{ request.user }}</div>
+				<div class="profile-usertitle-name"><em class="fa fa-user">&nbsp;</em> {{ request.user }}</div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
 			<div class="clear"></div>
@@ -43,10 +43,10 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="CH_Dashboard_M"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li><a href="CH_RegistrationApproval_list"><em class="fa fa-check">&nbsp;</em> Registration Approval</a></li>
-			<li class="active"><a href="CH_RegistrationStatus_M"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
-			<li><a href="CH_Login_M"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="CH_Dashboard_R"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="CH_FileSubmit_R"><em class="fa fa-pencil">&nbsp;</em> Product Registration</a></li>
+			<li class="active"><a href="CH_RegistrationStatus_R"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
+			<li><a href="CH_Login_R"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -76,11 +76,9 @@
 					<!---->
 					승인 여부
 				</div>
-				<div class="col-md-2 pull-right">
-						판매자
-					</div>
+				
 			</div>
-			<!--상품-->
+			<!-- 승인 상품-->
 			<div class="panel-body">
 				
 					<div class = "alert bg-teal">
@@ -89,15 +87,15 @@
 						
 						
 						<div class="col-md-2 pull-right ">
-							<!---->
+							
 							&nbsp;&nbsp;&nbsp;<em class="fa fa-check"></em>승인
 						</div>
-						<div class="col-md-2 pull-right">
-								판매자
-						</div>
+						
 					</div>
 				</div>
 				<!--상품 끝-->
+
+			<!-- 반려 상품-->
 			<div class="panel-body">
 					
 						<div class = "alert bg-danger">
@@ -108,11 +106,12 @@
 							<div class="col-md-2 pull-right">
 									&nbsp;&nbsp;&nbsp;<em class="fa fa-refresh"></em>반려
 							</div>
-							<div class="col-md-2 pull-right">
-									판매자
-							</div>
+						
 						</div>
 					</div>
+
+
+			<!-- 대기 상품-->
 			<div class="panel-body">
 					
 						<div class = "alert bg-warning">
@@ -123,9 +122,7 @@
 							<div class="col-md-2 pull-right">
 									&nbsp;&nbsp;&nbsp;<em class="fa fa-folder-open"></em>대기
 							</div>
-							<div class="col-md-2 pull-right">
-									판매자
-							</div>
+						
 						</div>
 					</div>
 			

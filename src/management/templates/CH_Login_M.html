@@ -25,7 +25,7 @@
 						{% csrf_token %}
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder = "login_id" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" type="text" />
+								<input class="form-control" placeholder = "name" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" type="text" />
 							</div>
 							<div class="form-group">
 								<input class="form-control" placeholder="password" id="{{ form.password.id_for_label }}" maxlength="120" name="{{ form.password.html_name }}" type="password" />
@@ -44,6 +44,12 @@
 					</form>
 				</div>
 				<div class="panel panel-footer">
+						
+				        {% if messages %}
+				            {% for message in messages %}
+				                <div class="alert bg-info" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> {{ message }} </div>
+				            {% endfor %}
+				        {% endif%} 
 						<fieldset>
 							<a href="CH_UserSelection" class="btn btn-default btn-md pull-right">Return to select page</a></fieldset>
 							

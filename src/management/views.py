@@ -1,6 +1,6 @@
 from management.functions import *
-
-from django.contrib.auth.decorators import login_required
+import glob
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
@@ -14,6 +14,7 @@ import shutil
 from .forms import MDCreationForm, MDLoginForm, RSCreationForm
 from .models import *
 import time
+import pandas as pd
 
 def index(request): 
     # sd = User.objects.get(username='test1')
@@ -22,11 +23,18 @@ def index(request):
     # for i in t:
     #     print(t)
     # print(request.user.id)
-    
-    # 맨 뒷부분 no는 나중에 바꿔줘야 함.
-    # r = img_classification("/src/management/upload/no")
-    # print(r)
+
     return render(request, 'CH_UserSelection.html')
+
+'''
+def MD_required(request):
+    def decorated():
+        try:
+            username = MD.objects.get(username=username)
+        except MD.DoesNotExit:
+            return render(request, 'CH_UserSelection.html')
+    return decorated()
+'''
 
 @login_required
 def Logout(request):
@@ -34,7 +42,7 @@ def Logout(request):
     return redirect(reverse("index"))
     
 def login_MD(request): 
-    print(request.user.cate)
+    # print(request.user.cate)
     
     # d = MD.objects.all()
     # print(d)
@@ -50,19 +58,24 @@ def login_MD(request):
         if user is not None:
             print(user.is_authenticated)
             print(user)
+            print(MD.objects.all())
             login(request, user)
             print("login success")
+            
             return HttpResponseRedirect(reverse('dashboard_MD'))
         else:
             # 로그인창에서 에러메세지 출력
-            return HttpResponseRedirect(reverse("login_MD"))
+            messages.warning(request,'Fail to log in. Please check id or password')
+            # return HttpResponseRedirect(reverse("login_MD"))
+            return render(request, 'CH_Login_M.html',{"form":form})
     else:
         form = MDLoginForm()
+        
         # return render(request,"CH_Login_M.html")
     
     return render(request, 'CH_Login_M.html',{"form":form})
 
-# @login_required
+#@permission_required('login_MD', login_url="^CH_Login_M")
 def dashboard_MD(request):
     # print(request.user.cate, request.user.id)
     return render(request, "CH_Dashboard_M.html", {"data":request})
@@ -88,9 +101,12 @@ def login_Seller(request):
             return HttpResponseRedirect(reverse('dashboard_RS'))
         else:
             # 로그인창에서 에러메세지 출력
-            return HttpResponseRedirect(reverse("login_Seller"))
+            messages.warning(request,'Fail to log in. Please check id or password')
+            # return HttpResponseRedirect(reverse("login_Seller"))
+            return render(request, 'CH_Login_R.html',{"form":form})
     else:
         form = MDLoginForm()
+        
 
     
     return render(request, 'CH_Login_R.html',{"form":form})
@@ -121,7 +137,7 @@ def signup_MD(request):
     d = MD.objects.all()
     print(d)
     for i in d:
-        print(i.username, i.pid, i.cate)
+        print(i.username, i.pid)
     return render(request, 'CH_Signup_M.html',{"form":form})
     
 def signup_Seller(request):
@@ -183,9 +199,6 @@ def Pr(request):
                 os.remove(dir_[0])
             fs.save(uploaded_file.name, uploaded_file)
             
-            # 여기 안 나옴. 수정 필요.
-            messages.success(request,'엑셀파일이 성공적으로 업로드되었습니다.')
-            
             return HttpResponseRedirect(reverse('Pr2'))
     
     
@@ -194,6 +207,8 @@ def Pr(request):
 # 이미지 업로드
 # @login_required
 def Pr2(request):
+    messages.success(request,'엑셀파일이 성공적으로 업로드되었습니다.')
+    
     username = "no"
     if request.user.is_authenticated:
         username = request.user
@@ -221,26 +236,65 @@ def Pr2(request):
     
     return render(request, 'CH_ImageSubmit_R.html', {'exceldata':result})
 
-def Idx_m(request):
-    return render(request, 'ClotheshangerIdx_m.html')
-def Idx_s(request):
-    return render(request, 'ClotheshangerIdx_s.html')
     
 #@login_required
-def Reg_approv(request):
-    username = "no"
-    if request.user.is_authenticated:
-        username = request.user
-    result = img_classification("/src/management/upload/"+str(username))
+def Reg_approv(request, name):
+    username = request.GET['name']
+    # if request.user.is_authenticated:
+    #     username = request.user
     temp = excel_to_data("management/upload/"+str(username))
+    if request.method=='POST':
+        filelist = glob.glob("management/upload/"+str(username)+"/*.xlsx")
+        df = pd.read_excel(filelist[0], header=1)
+        df.columns = [Product.name_dict[i] for i in df.columns]
+        for idx, dic in enumerate(df):
+            
+            for i in df.itertuples():
+                # print(i)
+                try:
+                    # 이미 상품이름이 등록되어 있으면 저장하지 않음.
+                    n = Product.objects.filter(pname = i.pname)
+                    print(n)
+                except:
+                    product = Product.objects.create(classes = request.POST[str(idx)], 
+                    sid = username, pname = i.pname, material = i.material, color = i.color, measurement = i.measurement,
+                    madefrom = i.madefrom, madein = i.madein, date_of_production = i.date_of_production, quality_gurantee = i.quality_gurantee,
+                    size = i.size, shoulder = i.shoulder, chest = i.chest, sleeve_len = i.sleeve_len, sleeve_end = i.sleeve_end,
+                    armpit = i.armpit, top_size = i.top_size, waist = i.waist, thigh = i.thigh, bottom = i.bottom, crotch = i.crotch,
+                    tail = i.tail, down_size = i.down_size, shoes_size = i.shoes_size, ball_foot = i.ball_foot, insole = i.insole, heel = i.heel,
+                    front_heel = i.front_heel, shoes_height = i.shoes_height)
+                    
+                    print(product)
+                    product.save()
+            
+            return redirect(reverse('Reg_status'))
+    
+    
+    result = img_classification("/src/management/upload/"+str(username))
+    
     prod_name = []
     for dic in temp:
         prod_name.append(": ".join(list(dic.items())[0]))
     del temp
-    data = [(name, img_route, classify) for name, (img_route, classify) in zip(prod_name, result)]
+    data = [(name, img_route.replace("/home/ubuntu/workspace/src/management","."), classify) for name, (img_route, classify) in zip(prod_name, result)]
+    print(data)
+        
     return render(request, 'CH_RegistrationApproval_M.html', {"data":data})
+
+# 판매자 리스트 보기.
+def Reg_list(request):
+    uploaded_list = glob.glob("/home/ubuntu/workspace/src/management/upload/*")
+    print(uploaded_list)
+    RS_list = [i.split("/")[-1] for i in uploaded_list]
+    return render(request, "CH_RegistrationApproval_list.html", {"data":RS_list})
+
 
 def Reg_status(request):
     
     ## 여기 템플릿에서 dashboard 클릭하면 오류뜬다.
     return render(request, "CH_RegistrationStatus_M.html")
+    
+def RS_status(request):
+    
+    return render(request, "CH_RegistrationStatus_R.html")
+

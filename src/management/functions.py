@@ -24,7 +24,7 @@ def img_classification(image_path):
                                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
                                ])
     validation_dataset = datasets.ImageFolder("/home/ubuntu/workspace"+image_path, transform=transform)
-    validation_loader = torch.utils.data.DataLoader(validation_dataset, batch_size = 20, shuffle=True)
+    validation_loader = torch.utils.data.DataLoader(validation_dataset, batch_size = 20)
     
     classes = ('가방', '긴바지','단화','맨투맨|후드집업','반바지','반팔티','블라우스','스니커즈','스웨터','아우터','치마|스커트','하이힐')
     
@@ -34,7 +34,8 @@ def img_classification(image_path):
     # labels = labels.to(device)
     output = model(images)
     _, preds = torch.max(output, 1)
-    imglist = glob.glob("/home/ubuntu/workspace"+image_path+"/images/*.*")
+    imglist = sorted(glob.glob("/home/ubuntu/workspace"+image_path+"/images/*.*"))
+    print(imglist)
     return [(img, classes[preds[idx].item()]) for img, idx in zip(imglist ,range(len(preds)))]
 
     

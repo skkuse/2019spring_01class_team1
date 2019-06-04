@@ -33,15 +33,17 @@ urlpatterns = [
     url(r'^CH_Signup_R', signup_Seller, name = 'signup_Seller'),
     url(r'^CH_Dashboard_M', dashboard_MD, name = 'dashboard_MD'),
     url(r'^CH_Dashboard_R', dashboard_RS, name = 'dashboard_RS'),
-    url(r'^ClotheshangerRa_m',Ra_m, name = 'Ra_m'),
-    url(r'^ClotheshangerRs_m',Rs_m, name = 'Rs_m'),
-    url(r'^ClotheshangerIdx_m',Idx_m, name =  'Idx_m' ),
-    url(r'^ClotheshangerIdx_s', Idx_s, name = 'Idx_s'),
+    # url(r'^ClotheshangerRa_m',Ra_m, name = 'Ra_m'),
+    # url(r'^ClotheshangerRs_m',Rs_m, name = 'Rs_m'),
+    # url(r'^ClotheshangerIdx_m',Idx_m, name =  'Idx_m' ),
+    # url(r'^ClotheshangerIdx_s', Idx_s, name = 'Idx_s'),
     url(r'Logout', Logout, name = 'logout'),
     url(r'^CH_FileSubmit', Pr, name = 'Pr'),
     url(r'^CH_ImageSubmit', Pr2, name ='Pr2'),
-    url(r'^CH_RegistrationApproval', Reg_approv, name = 'Reg_approv'),
-    url(r'^CH_RegistrationStatus', Reg_status, name = 'Reg_status'),
+    url(r'^CH_RegistrationApproval?(name=\w+)?$', Reg_approv, name = 'Reg_approv'),
+    url(r'^CH_RegistrationStatus_M', Reg_status, name = 'Reg_status'),
+    url(r'^CH_RegistrationStatus_R', RS_status, name = 'RS_status'),
+    url(r'^CH_RegistrationApproval_list',Reg_list, name = 'Reg_list'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

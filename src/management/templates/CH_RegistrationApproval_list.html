@@ -42,7 +42,7 @@
 		</form>
 		<ul class="nav menu">
 			<li><a href="CH_Dashboard_M"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li class="active"><a href="CH_RegistrationApproval_list"><em class="fa fa-check">&nbsp;</em> Registration Approval</a></li>
+			<li class="active"><a href="CH_RegistrationApproval_M"><em class="fa fa-check">&nbsp;</em> Registration Approval</a></li>
 			<li><a href="CH_RegistrationStatus_M"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
 			<li><a href="CH_Login_M"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
@@ -65,50 +65,43 @@
 		</div><!--/.row-->
 
 		<div class="row">
-			<form method = "post" enctype="multipart/form-data">
-				{% csrf_token %}
 			<div class="col-md-12">
-						
-							<button type="submit" class="btn btn-primary btn-md pull-right">등록승인</button>
+						<!--<fieldset>-->
+							<!--<a href="#" class="btn btn-primary btn-md pull-right">일괄 처리</a></fieldset>-->
 							
 				</div>
 				<div class="panel-heading">
-					
+
 				</div>
-			
+				
 			<div class="col-md-12">
-				<div class="alert bg-primary" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> 
-					딥러닝 이미지 분류 결과입니다. 
-					딥러닝 분류가 잘못된 게 있다면 수정해주시고, 등록할 수 없는 상품이라면 '반려'라고 입력한 뒤 등록버튼을 눌러주세요
-					 </div>	
 				<div class="panel panel-default">
 					<div class="panel-heading profile-usertitle-status">
-					대기 중인 상품 목록
+					대기 중인 판매자 목록
 					</div>
 					<!--상품-->
-					<form>
 					{% for iter in data %}
 					<div class="panel-body">
-							<!--request.POST['0'] 1... 이런식-->
+							
 						<div class="col-md-2">
 							<!--if문 사용 하는 부분-->
-							<img width='90' src = "{{ iter.1 }}" alt="image"/>
+							<!--<img width="90" src = "{{ iter.1 }}" alt="image"/>-->
 						</div>
 						<div class="col-md-8">
-						<h3>{{ iter.0 }}</h3>
+						<a href="CH_RegistrationApproval?name={{ iter }}"><h5>{{ iter }}</h5></a>
 						<div class="panel-body"></div>
-						<p>분류결과 : </p><input type="text" class="form-control" value = "{{ iter.2 }}" name = "{{forloop.counter0}}">
+						<!--<p>분류결과 : <span class="color-teal">{{ iter.2 }}</span></p>-->
 						</div>
-						<div class="col-md-2 pull-right">
-							<!--<div class="form-group"></div>-->
-							<!--<button type="button" class="btn btn-lg btn-success">승인</button>-->
+						<!--<div class="col-md-2 pull-right">-->
+						<!--	<div class="form-group"></div>-->
+						<!--	<button type="button" class="btn btn-lg btn-success">승인</button>-->
 							
-							<!--<button type="button" class="btn btn-lg btn-warning">반려</button>-->
-						</div>							
+						<!--	<button type="button" class="btn btn-lg btn-warning">반려</button>-->
+						<!--</div>							-->
 					</div>
-						
-					{% endfor %}
-			</form><!--상품 하나 끝-->
+					{% endfor %}	
+					
+					<!--상품 하나 끝-->
 					<!--상품-->
 					<!--<div class="panel-body">-->
 							

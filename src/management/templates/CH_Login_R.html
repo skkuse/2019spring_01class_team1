@@ -43,6 +43,13 @@
 					</form>
 				</div>
 				<div class="panel panel-footer">
+					    
+				        {% if messages %}
+				            {% for message in messages %}
+				                <div class="alert bg-info" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> {{ message }} </div>
+				            {% endfor %}
+				        {% endif%}
+
 						<fieldset>
 							<a href="CH_UserSelection" class="btn btn-default btn-md pull-right">Return to select page</a></fieldset>
 							
