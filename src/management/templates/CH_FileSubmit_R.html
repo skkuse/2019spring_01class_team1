@@ -1,0 +1,147 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Clotheshanger - Product Registration</title>
+	<link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/font-awesome.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/datepicker3.css" %}' rel="stylesheet">
+	<link href='{% static "css/styles.css" %}' rel="stylesheet">
+	
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><span>Clothes</span>Hanger</a>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name"><em class="fa fa-user">&nbsp;</em> {{ request.user }}</div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="CH_Dashboard_R"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li class="active"><a href="CH_FileSubmit_R"><em class="fa fa-pencil">&nbsp;</em> Product Registration</a></li>
+			<li><a href="CH_RegistrationStatus_R"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
+			<li><a href="CH_Login_R"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+		</ul>
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li class="active">Widgets</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Product Registration</h1>
+			</div>
+		</div><!--/.row-->
+
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body tabs">
+						<ul class="nav nav-tabs">
+								<li class="active"><a href="#tab1" data-toggle="tab">Excel upload</a></li>
+							</ul>
+					<div class="tab-content">		
+						<div class="tab-pane fade in active" id="tab1">
+							<div class="col-lg-12">
+								<!--<h2>Alerts</h2>-->
+								<!--	<div class="alert bg-primary" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template </div>-->
+								<!--	<div class="alert bg-info" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+								<!--	<div class="alert bg-teal" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+								<!--	<div class="alert bg-success" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+								<!--	<div class="alert bg-warning" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+								<!--	<div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>-->
+								{% if messages %}
+						            {% for message in messages %}
+						                <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> {{ message }} </div>
+						            {% endfor %}
+						        {% endif%} 
+					        </div>
+					        
+					        <div class="panel-footer form-group">
+								<h3>상품 등록하기</h2>
+								<br>
+								<form method = "post" enctype="multipart/form-data">
+							        {% csrf_token %}
+							        <input type = "file" name = "document">
+							        <!--<input type="submit" value="Go to my link location" onclick="window.location='/images.html';" />       -->
+							        <br>
+							        <button type = "submit" class="btn btn-sm btn-default">Upload file</button>
+							    </form>
+								<!--<form action="ClotheshangerPr2_s.html"-->
+								<!--	method="POST" enctype="multipart/form-data">-->
+								<!--	<input type="file" name="userfile">-->
+								<!--	<input type="submit" value="upload" class="pull-right">-->
+								<!--	<p class="help-block">Example block-level help text here.</p>-->
+						
+								<!--</form>-->
+							</div><!--file input-->
+					        
+							<div class="panel-heading">
+								<em class="fa fa-paperclip">상품 등록방법 안내</em>
+							</div>
+							<div class="panel-body">
+								<div style="position: relative; height:0; padding-bottom: 30%">
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/z-9KnDgRCjQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+								</div>
+								<ol>
+									<li>~ 한다.</li>
+									<li>~ 한다.</li>
+									<li>~ 한다.</li>
+									<li>~ 한다.</li>
+									<li>~ 한다.</li>
+								</ol>
+							</div>
+
+							
+						</div><!--tab1-->
+					</div>
+				</div><!--tabs-->	
+			</div>
+		</div>	
+			<div class="col-sm-12">
+				<p class="back-link">ClothesHanger</p>
+			</div>
+		</div><!--/.row-->
+	</div>	<!--/.main-->
+	  
+
+	<script src='{% static "js/jquery-1.11.1.min.js" %}'></script>
+	<script src='{% static "js/bootstrap.min.js" %}'></script>
+	<script src='{% static "js/chart.min.js" %}'></script>
+	<script src='{% static "js/chart-data.js" %}'></script>
+	<script src='{% static "js/easypiechart.js" %}'></script>
+	<script src='{% static "js/easypiechart-data.js" %}'></script>
+	<script src='{% static "js/bootstrap-datepicker.js" %}'></script>
+	<script src='{% static "js/custom.js" %}'></script>
+	
+</body>
+</html>

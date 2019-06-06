@@ -1,0 +1,190 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Clotheshanger - Registration Status</title>
+	<link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/font-awesome.min.css" %}' rel="stylesheet">
+	<link href='{% static "css/datepicker3.css" %}' rel="stylesheet">
+	<link href='{% static "css/styles.css" %}' rel="stylesheet">
+	
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				
+				<a class="navbar-brand" href="CH_Dashboard_R"><span>Clothes</span>Hanger</a>
+				
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+			
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name"><em class="fa fa-user">&nbsp;</em> {{ request.user }}</div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="CH_Dashboard_R"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li><a href="CH_FileSubmit_R"><em class="fa fa-pencil">&nbsp;</em> Product Registration</a></li>
+			<li class="active"><a href="CH_RegistrationStatus_R"><em class="fa fa-paste">&nbsp;</em> Registration Status</a></li>
+			<li><a href="CH_Login_R"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+		</ul>
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li class="active">Registration Status</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Registration Status</h1>
+			</div>
+		</div><!--/.row-->
+
+
+		
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading profile-usertitle-status">
+			상품 목록
+				<div class="col-md-2 pull-right ">
+					<!---->
+					승인 여부
+				</div>
+				
+			</div>
+			<!-- 승인 상품-->
+			<div class="panel-body">
+				
+					<div class = "alert bg-teal">
+						
+							상품 예시 1. 
+						
+						
+						<div class="col-md-2 pull-right ">
+							
+							&nbsp;&nbsp;&nbsp;<em class="fa fa-check"></em>승인
+						</div>
+						
+					</div>
+				
+				<!--상품 끝-->
+				{% for product in products %}
+					{% if product.classes != "반려" %}
+					  <div>
+					  	{{ product.pname }}
+					  		<div class="col-md-2 pull-right ">
+								<!---->
+								{{ product.classes }}
+							</div>
+							<!--<div class="col-md-2 pull-right">-->
+							  	
+							<!--</div>-->
+					  </div>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<!-- 반려 상품-->
+			<div class="panel-body">
+					
+						<div class = "alert bg-danger">
+							
+								상품 예시 2.
+							
+					
+							<div class="col-md-2 pull-right">
+									&nbsp;&nbsp;&nbsp;<em class="fa fa-refresh"></em>반려
+							</div>
+						
+						</div>
+					
+				{% for product in products %}
+					{% if product.classes == "반려" %}
+					  <div>
+					  	{{ product.pname }}
+					  		<div class="col-md-2 pull-right ">
+								<!---->
+								{{ product.classes }}
+							</div>
+							
+					  </div>
+					{% endif %}
+				{% endfor %}
+			</div>
+
+			<!-- 대기 상품-->
+			<div class="panel-body">
+					
+						<div class = "alert bg-warning">
+							
+								상품 예시 3.
+							
+					
+							<div class="col-md-2 pull-right">
+									&nbsp;&nbsp;&nbsp;<em class="fa fa-folder-open"></em>대기
+							</div>
+						
+						</div>
+					
+				{% for data in result %}
+					{% for pname, seller, class_ in data %}
+					  <div>
+					  	{{ pname }}
+					  		<div class="col-md-2 pull-right ">
+								<!---->
+								{{ class_ }}
+							</div>
+							
+					  </div>
+					{% endfor %}	
+				{% endfor %}
+			</div>
+	</div>
+</div>
+	<!--상품 하나 끝-->
+		
+			<div class="col-sm-12">
+				<p class="back-link">ClothesHanger</a></p>
+			</div>
+		</div><!--/.row-->
+	</div>	<!--/.main-->
+
+
+
+	<script src='{% static "js/jquery-1.11.1.min.js" %}'></script>
+	<script src='{% static "js/bootstrap.min.js" %}'></script>
+	<script src='{% static "js/chart.min.js" %}'></script>
+	<script src='{% static "js/chart-data.js" %}'></script>
+	<script src='{% static "js/easypiechart.js" %}'></script>
+	<script src='{% static "js/easypiechart-data.js" %}'></script>
+	<script src='{% static "js/bootstrap-datepicker.js" %}'></script>
+	<script src='{% static "js/custom.js" %}'></script>
+	
+	</script>	
+</body>
+</html>
