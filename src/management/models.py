@@ -13,17 +13,17 @@ class User(AbstractUser):
     pid = models.CharField(verbose_name = 'pid',max_length=30, blank=True)
     sid = models.CharField(verbose_name = 'sid',max_length=255,blank=True)
     
-    # def is_md(self):
-    #     if str(self.cate) == 'MD':
-    #         return True
-    #     else:
-    #         return False
+    def is_md(self):
+        if str(self.cate) == 'MD':
+            return True
+        else:
+            return False
     
-    # def is_rs(self):
-    #     if str(self.cate) == 'RS':
-    #         return True
-    #     else:
-    #         return False
+    def is_rs(self):
+        if str(self.cate) == 'RS':
+            return True
+        else:
+            return False
 
 class MD(User):
     # objects = models.Manager()
