@@ -24,13 +24,6 @@ def index(request):
 MD_login_required = user_passes_test(lambda u: True if u.is_md() else False, login_url='login_MD')
 RS_login_required = user_passes_test(lambda u: True if u.is_rs() else False, login_url='login_RS')
     
-def MERCHANDISE_login_required(view_func):
-    decorated_view_func = login_required(MD_login_required(view_func), login_url='login_MD')
-    return decorated_view_func
-    
-def RSUSER_login_required(view_func):
-    decorated_view_func = login_required(RS_login_required(view_func), login_url='login_RS')
-    return decorated_view_func
 
 @login_required
 def Logout(request):
