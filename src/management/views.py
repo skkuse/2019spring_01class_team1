@@ -246,19 +246,20 @@ def Reg_approv(request, name):
             n = Product.objects.filter(pname = i.pname)
             if len(n)==0:
                 product = Product.objects.create(classes = request.POST[str(idx)], 
-            sid = username, pname = i.pname, material = i.material, color = i.color, measurement = i.measurement,
-            madefrom = i.madefrom, madein = i.madein, date_of_production = i.date_of_production, quality_gurantee = i.quality_gurantee,
-            size = i.size, shoulder = i.shoulder, chest = i.chest, sleeve_len = i.sleeve_len, sleeve_end = i.sleeve_end,
-            armpit = i.armpit, top_size = i.top_size, waist = i.waist, thigh = i.thigh, bottom = i.bottom, crotch = i.crotch,
-            tail = i.tail, down_size = i.down_size, shoes_size = i.shoes_size, ball_foot = i.ball_foot, insole = i.insole, heel = i.heel,
-            front_heel = i.front_heel, shoes_height = i.shoes_height)
+                    sid = username, pname = i.pname, material = i.material, color = i.color, measurement = i.measurement,
+                    madefrom = i.madefrom, madein = i.madein, date_of_production = i.date_of_production, quality_gurantee = i.quality_gurantee,
+                    size = i.size, shoulder = i.shoulder, chest = i.chest, sleeve_len = i.sleeve_len, sleeve_end = i.sleeve_end,
+                    armpit = i.armpit, top_size = i.top_size, waist = i.waist, thigh = i.thigh, bottom = i.bottom, crotch = i.crotch,
+                    tail = i.tail, down_size = i.down_size, shoes_size = i.shoes_size, ball_foot = i.ball_foot, insole = i.insole, heel = i.heel,
+                    front_heel = i.front_heel, shoes_height = i.shoes_height)
             
                 print(product)
                 product.save()
             # 모델에 저장완료 후, 로컬에 저장된 내용 삭제(엑셀, 이미지)
-            # shutil.rmtree('management/upload/'+str(username))
+            
                 
-                
+        
+        shutil.rmtree('management/upload/'+str(username))        
         return redirect(reverse('Reg_status'))
     
     
@@ -280,16 +281,18 @@ def Reg_list(request):
     RS_list = [i.split("/")[-1] for i in uploaded_list]
     return render(request, "CH_RegistrationApproval_list.html", {"data":RS_list})
 
-
+@MERCHANDISE_login_required
 def Reg_status(request):
     # 전체 모델값 불러오기
     # print(Product.objects.all())
     products = Product.objects.all()
     context = {'products': products}
+    print(products)
     #print(context['products'][0])
     ## 여기 템플릿에서 dashboard 클릭하면 오류뜬다.
     return render(request, "CH_RegistrationStatus_M.html", context)
     
+@RSUSER_login_required
 def RS_status(request):
     
     # 본인 이름으로 올라온 상품만 봐야 한다
@@ -298,18 +301,20 @@ def RS_status(request):
         username = request.user
     # n = Product.objects.filter(username)
     
-    
+    try:
     ## 엑셀 파일 올라간거 데이터.
-    temp = excel_to_data("management/upload/"+str(username))
-    result=[]
-    for dic in temp:
-        a = list(dic.values())[0] # 상품 이름만 가져오기
-        class_ = '대기'
-        seller = username
-        result.append((a, seller, class_))
-    
-    products = Product.objects.filter(sid = username)
-    context = {'products': products, "excel" : result}
-    
-    return render(request, "CH_RegistrationStatus_R.html", context)
+        temp = excel_to_data("management/upload/"+str(username))
+        result=[]
+        for dic in temp:
+            a = list(dic.values())[0] # 상품 이름만 가져오기
+            class_ = '대기'
+            seller = username
+            result.append((a, seller, class_))
+        print(result)
+    except:
+        result=[]
+        
+    finally:
+        products = Product.objects.filter(sid = username)
+        return render(request, "CH_RegistrationStatus_R.html", {'products': products, "result" : result})
 

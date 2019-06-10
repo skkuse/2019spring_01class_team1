@@ -71,82 +71,52 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading profile-usertitle-status">
-			상품 목록
+				상품 목록
 				<div class="col-md-2 pull-right ">
 					<!---->
 					승인 여부
 				</div>
 				<div class="col-md-2 pull-right">
-						판매자
-					</div>
+					판매자
+				</div>
 			</div>
+		
 			<!--상품-->
+			{% for product in products %}
+				{% if product.classes != "반려" %}
+
 			<div class="panel-body">
-				
-					<div class = "alert bg-teal">
-						
-							등록 상품 
-						
-						
-						<div class="col-md-2 pull-right ">
-							<!---->
-							&nbsp;&nbsp;&nbsp;<em class="fa fa-check"></em>승인
+				<div class = "alert bg-teal">
+						{{ product.pname }}
+					<div class="col-md-2 pull-right ">
+						&nbsp;&nbsp;&nbsp;<em class="fa fa-check"></em>
+						{{ product.classes }}
+					</div>
+					<div class="col-md-2 pull-right">
+						{{ product.sid }}
+					</div>
+				</div>
+			</div>
+			
+				{% endif %}
+				{% if product.classes == "반려" %}
+				<div class="panel-body">
+					<div class = "alert bg-danger">
+						{{ product.pname }}
+						<div class="col-md-2 pull-right">
+							&nbsp;&nbsp;&nbsp;<em class="fa fa-refresh"></em>
+							{{ product.classes }}
 						</div>
 						<div class="col-md-2 pull-right">
-								판매자
+							{{ product.sid }}
 						</div>
 					</div>
-			
-				{% for product in products %}
-					{% if product.classes != "반려" %}
-					  <div>
-					  	{{ product.pname }}
-					  		<div class="col-md-2 pull-right ">
-								<!---->
-								{{ product.classes }}
-							</div>
-							<div class="col-md-2 pull-right">
-							  	{{ product.sid }}
-							</div>
-					  </div>
-					{% endif %}
-				{% endfor %}
-				<!--상품 끝-->
 				</div>
-			<div class="panel-body">
-					
-						<div class = "alert bg-danger">
-							
-								반려 상품
-							
-					
-							<div class="col-md-2 pull-right">
-									&nbsp;&nbsp;&nbsp;<em class="fa fa-refresh"></em>반려
-							</div>
-							<div class="col-md-2 pull-right">
-									판매자
-							</div>
-						</div>
-					
-				{% for product in products %}
-					{% if product.classes == "반려" %}
-					  <div>
-					  	{{ product.pname }}
-					  		<div class="col-md-2 pull-right ">
-								<!---->
-								{{ product.classes }}
-							</div>
-							<div class="col-md-2 pull-right">
-							  	{{ product.sid }}
-							</div>
-					  </div>
-					{% endif %}
-				{% endfor %}
-			</div>
-			
+				{% endif %}
+			{% endfor %}
+		</div>
 	</div>
-</div>
-	<!--상품 하나 끝-->
+			<!--상품 끝-->
 		
 			<div class="col-sm-12">
 				<p class="back-link">ClothesHanger</a></p>

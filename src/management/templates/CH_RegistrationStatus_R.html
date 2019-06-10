@@ -83,7 +83,7 @@
 				
 					<div class = "alert bg-teal">
 						
-							상품 예시 1. 
+							등록 상품
 						
 						
 						<div class="col-md-2 pull-right ">
@@ -114,7 +114,7 @@
 					
 						<div class = "alert bg-danger">
 							
-								상품 예시 2.
+								반려 상품
 							
 					
 							<div class="col-md-2 pull-right">
@@ -142,7 +142,7 @@
 					
 						<div class = "alert bg-warning">
 							
-								상품 예시 3.
+								대기 상품
 							
 					
 							<div class="col-md-2 pull-right">
@@ -151,21 +151,20 @@
 						
 						</div>
 					
-				{% for data in result %}
-					{% for pname, seller, class_ in data %}
+				{% for i in result %}
 					  <div>
-					  	{{ pname }}
+					  	{{ i.0 }}
 					  		<div class="col-md-2 pull-right ">
 								<!---->
-								{{ class_ }}
+								{{ i.2 }}
 							</div>
 							
 					  </div>
-					{% endfor %}	
+						
 				{% endfor %}
 			</div>
+		</div>
 	</div>
-</div>
 	<!--상품 하나 끝-->
 		
 			<div class="col-sm-12">
