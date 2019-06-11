@@ -46,11 +46,13 @@ conda install -c pytorch torchvision
 이후 src로 디렉토리를 이동한 다음
 
 ```python
-./manage.py makemigrations management
+python ./manage.py makemigrations management
 
-./manage.py migrate
+python ./manage.py migrate
 
-./manage.py runserver 0.0.0.0:8080
+python ./manage.py runserver 0.0.0.0:8080
 
 ```
 명령어를 순차적으로 실행해 로컬서버를 구동한다.
+
+(python 기본 path가 2.7로 설정되어 있다면 python3으로 구동하면 된다.)
