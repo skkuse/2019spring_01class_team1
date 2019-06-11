@@ -1,42 +1,56 @@
-
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+# Cloth_Hanger
 
 
-Welcome to your Django project on Cloud9 IDE!
+딥러닝 기반 여성의류 분류 시스템
 
-Your Django project is already fully setup. Just click the "Run" button to start
-the application. On first run you will be asked to create an admin user. You can
-access your application from 'https://project-inspirit941.c9users.io/' and the admin page from 
-'https://project-inspirit941.c9users.io/admin'.
+## 개발환경
 
-## Starting from the Terminal
+Ubuntu 12.04
 
-In case you want to run your Django application from the terminal just run:
+Django version 2.1.2
 
-1) Run syncdb command to sync models to database and create Django's default superuser and auth system
+Python version 3.7.3
 
-    $ python manage.py migrate
+pytorch version 1.1.0
 
-2) Run Django
+torchvision 0.3.0
 
-    $ python manage.py runserver $IP:$PORT
-    
-## Configuration
+pandas 0.24.2
 
-You can configure your Python version and `PYTHONPATH` used in
-Cloud9 > Preferences > Project Settings > Language Support.
+miniconda 개발환경 사용
 
-## Support & Documentation
+## 설치방법
 
-Django docs can be found at https://www.djangoproject.com/
+git clone으로 모든 데이터를 다운받는다, 단, 'management' 폴더 안에 있는 classification_model 데이터는 git lfs로 저장했기 때문에 clone으로는 다운되지 않는다. 따로 선택해 다운받아야 한다.
 
-You may also want to follow the Django tutorial to create your first application:
-https://docs.djangoproject.com/en/1.9/intro/tutorial01/
+(classification_model의 정상적인 데이터 크기는 약 500MB로, git clone으로 다운받았을 시에는 이 크기보다 한참 작은 값이 로딩되어 있다.)
 
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE.
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+### Windows
+
+anaconda3 설치 (https://www.anaconda.com/distribution/)
+
+설치 후 anaconda prompt를 열고
+
+```
+conda install -c anaconda django
+
+conda install -c anaconda sqlparse
+
+conda install -c pytorch pytorch
+
+conda install -c pytorch torchvision
+```
+
+로 django 및 pytorch를 설치한다.
+
+이후 src로 디렉토리를 이동한 다음
+
+```python
+./manage.py makemigrations management
+
+./manage.py migrate
+
+./manage.py runserver 0.0.0.0:8080
+
+```
+명령어를 순차적으로 실행해 로컬서버를 구동한다.
