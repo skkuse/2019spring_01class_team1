@@ -263,20 +263,20 @@ def Reg_approv(request, name):
         return redirect(reverse('Reg_status'))
     
     
-    result = img_classification("/src/management/upload/"+str(username))
+    result = img_classification("/management/upload/"+str(username))
     
     prod_name = []
     for dic in temp:
         prod_name.append(": ".join(list(dic.items())[0]))
     del temp
-    data = [(name, img_route.replace("/home/ubuntu/workspace/src/management","."), classify) for name, (img_route, classify) in zip(prod_name, result)]
+    data = [(name, img_route.replace(str(os.getcwd())+"/management","."), classify) for name, (img_route, classify) in zip(prod_name, result)]
     print(data)
         
     return render(request, 'CH_RegistrationApproval_M.html', {"data":data})
 
 # 판매자 리스트 보기.
 def Reg_list(request):
-    uploaded_list = glob.glob("/home/ubuntu/workspace/src/management/upload/*")
+    uploaded_list = glob.glob("management/upload/*")
     print(uploaded_list)
     RS_list = [i.split("/")[-1] for i in uploaded_list]
     return render(request, "CH_RegistrationApproval_list.html", {"data":RS_list})
